@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102622" />
+    <meta
+      name="description"
+      content="Inscrição para a Expedição Rio Tietê, de 22 a 29 de novembro de 2026. Barra Bonita a Santa Clara D’Oeste, com JetChula e Usina do Jet."
+    />
+    <meta
+      property="og:title"
+      content="Expedição Rio Tietê — JetChula & Usina do Jet"
+    />
+    <meta
+      property="og:description"
+      content="De Barra Bonita a Santa Clara D’Oeste. 22 a 29 de novembro de 2026."
+    />
+    <meta property="og:type" content="website" />
+    <title>Expedição Rio Tietê 2026 | JetChula + Usina do Jet</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="./assets/favicon-64.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/apple-touch-icon.png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/eclusas-hero.webp"
+      media="(min-width: 641px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/eclusas-mobile.webp"
+      media="(max-width: 640px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="./assets/fonts/barlow-condensed-700.woff2"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="./assets/fonts/dm-sans-variable.woff2"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#inscricao">Pular para a inscrição</a>
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="arrow" viewBox="0 0 24 24">
+        <path d="M4 12h15M13 5l7 7-7 7" />
+      </symbol>
+      <symbol id="check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" />
+      </symbol>
+      <symbol id="pin" viewBox="0 0 24 24">
+        <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </symbol>
+      <symbol id="calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M7 3v5m10-5v5M3 11h18" />
+      </symbol>
+      <symbol id="upload" viewBox="0 0 24 24">
+        <path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5" />
+      </symbol>
+      <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 3 3 6v6c0 5 9 9 9 9s9-4 9-9V6Z" />
+        <path d="m8 12 3 3 5-6" />
+      </symbol>
+      <symbol id="file" viewBox="0 0 24 24">
+        <path d="M14 2H5v20h14V7Zm0 0v6h5M8 13h8m-8 4h6" />
+      </symbol>
+      <symbol id="phone-symbol" viewBox="0 0 24 24">
+        <path
+          d="m5 3 4 1 1 5-3 2c2 3 3 4 6 6l2-3 5 1 1 4c-1 5-7 2-11-1C5 14 1 7 5 3Z"
+        />
+      </symbol>
+      <symbol id="waves" viewBox="0 0 24 24">
+        <path
+          d="M2 7c4-5 6 5 10 0s6 5 10 0M2 13c4-5 6 5 10 0s6 5 10 0M2 19c4-5 6 5 10 0s6 5 10 0"
+        />
+      </symbol>
+      <symbol id="edit" viewBox="0 0 24 24">
+        <path d="m16 3 5 5L9 20l-6 1 1-6ZM13 6l5 5" />
+      </symbol>
+    </svg>
+
+    <header class="site-header" id="inicio">
+      <a
+        class="brand-pair"
+        href="#inicio"
+        aria-label="JetChula e Usina do Jet — início"
+      >
+        <svg
+          class="brand-jet"
+          viewBox="70 490 980 365"
+          role="img"
+          aria-label="Jet Chula"
+        >
+          <image href="./assets/jet-chula.png" width="1080" height="1350" />
+        </svg>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <img
+          class="brand-usina"
+          src="./assets/usina.png"
+          alt="Usina do Jet"
+          width="66"
+          height="66"
+        />
+      </a>
+      <nav aria-label="Navegação principal">
+        <a class="header-contact" href="#contato"
+          >Fale com a equipe <svg class="icon"><use href="#arrow" /></svg
+        ></a>
+        <a class="button button-small button-outline" href="#inscricao"
+          >Fazer inscrição <svg class="icon"><use href="#arrow" /></svg
+        ></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <picture class="hero-picture">
+          <source
+            media="(max-width: 640px)"
+            srcset="./assets/eclusas-mobile.webp"
+          />
+          <img
+            src="./assets/eclusas-hero.webp"
+            alt="Cena ilustrativa de uma expedição de jet skis em uma eclusa, cercada pela paisagem verde do rio."
+            width="1920"
+            height="1080"
+            fetchpriority="high"
+          />
+        </picture>
+        <div class="hero-shade"></div>
+        <div class="hero-content container">
+          <p class="eyebrow">
+            <span class="little-line"></span> JETCHULA + USINA DO JET APRESENTAM
+          </p>
+          <h1 id="hero-title">ECLUSAS<br />DO <span>TIETÊ.</span></h1>
+          <p class="hero-subtitle">
+            Uma expedição. Um rio inteiro de histórias.
+          </p>
+          <p class="hero-route">
+            Barra Bonita <span aria-hidden="true">→</span> Santa Clara D’Oeste
+          </p>
+          <div class="hero-actions">
+            <a class="button button-lime" href="#inscricao"
+              >Quero fazer parte <svg class="icon"><use href="#arrow" /></svg
+            ></a>
+            <div class="hero-date">
+              <strong>22 — 29</strong><span>NOVEMBRO · 2026</span>
+            </div>
+          </div>
+        </div>
+        <span class="image-credit"
+          >CENA ILUSTRATIVA · IMAGEM GERADA POR IA</span
+        >
+        <div class="hero-bottom container">
+          <span>EXPEDIÇÃO RIO TIETÊ / 2026</span
+          ><a href="#inscricao"
+            >SUA PRÓXIMA HISTÓRIA COMEÇA AQUI
+            <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </section>
+
+      <div class="journey-band" aria-label="Informações da expedição">
+        <div class="container journey-inner">
+          <div class="journey-date">
+            <svg class="icon"><use href="#calendar" /></svg>
+            <div>
+              <span>RESERVE A DATA</span><strong>22 a 29 de novembro</strong>
+            </div>
+          </div>
+          <div class="journey-route">
+            <div><span>EMBARQUE</span><strong>Barra Bonita</strong></div>
+            <div class="route-trace" aria-hidden="true">
+              <i></i><b></b><svg class="icon"><use href="#waves" /></svg><b></b
+              ><i></i>
+            </div>
+            <div><span>DESTINO</span><strong>Santa Clara D’Oeste</strong></div>
+          </div>
+          <span class="journey-state">SÃO PAULO, BRASIL</span>
+        </div>
+      </div>
+
+      <section
+        class="registration container"
+        id="inscricao"
+        aria-labelledby="registration-title"
+      >
+        <div class="registration-heading">
+          <div>
+            <p class="eyebrow text-teal">SEU LUGAR NA EXPEDIÇÃO</p>
+            <h2 id="registration-title">Prepare-se para embarcar.</h2>
+          </div>
+          <p>
+            Preencha com calma. Antes de enviar,<br class="desktop-only" />
+            você poderá conferir todas as informações.
+          </p>
+        </div>
+        <div class="registration-grid">
+          <aside class="form-sidebar" aria-label="Etapas e orientações">
+            <div class="sidebar-heading">
+              <span class="eyebrow">ROTEIRO DA INSCRIÇÃO</span
+              ><span id="sidebar-count">01 / 07</span>
+            </div>
+            <nav
+              class="step-nav"
+              aria-label="Etapas da inscrição"
+              id="step-nav"
+            ></nav>
+            <div class="preparation">
+              <svg class="icon"><use href="#file" /></svg>
+              <div>
+                <h3>Tenha por perto</h3>
+                <p>
+                  CPF, RG, documento da moto aquática e habilitação náutica.
+                </p>
+                <span
+                  >Documentos em PDF, JPG ou PNG.<br />Até 5 MB por
+                  arquivo.</span
+                >
+              </div>
+            </div>
+            <a class="sidebar-help" href="#contato"
+              >Precisa de uma mão? <svg class="icon"><use href="#arrow" /></svg
+            ></a>
+          </aside>
+
+          <div class="form-card" id="form-card">
+            <div class="progress-top">
+              <span id="step-count">ETAPA 01 DE 07</span
+              ><span id="progress-label">Vamos começar</span>
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-label="Progresso da inscrição"
+              aria-valuemin="0"
+              aria-valuemax="7"
+              aria-valuenow="0"
+              id="progress"
+            >
+              <span id="progress-fill"></span>
+            </div>
+            <form id="expedition-form" novalidate>
+              <fieldset id="form-fields">
+                <legend class="sr-only">
+                  Inscrição para a Expedição Rio Tietê
+                </legend>
+                <div class="step-heading">
+                  <p class="eyebrow text-teal" id="step-tag"></p>
+                  <h3 id="step-title" tabindex="-1"></h3>
+                  <p id="step-description"></p>
+                </div>
+                <p class="required-note">
+                  Campos com <span>*</span> são obrigatórios.
+                </p>
+                <div
+                  class="error-summary"
+                  id="error-summary"
+                  role="alert"
+                  hidden
+                ></div>
+                <div id="step-content"></div>
+                <div class="form-navigation">
+                  <button
+                    type="button"
+                    id="back-button"
+                    class="button button-back"
+                  >
+                    <svg class="icon"><use href="#arrow" /></svg> Voltar</button
+                  ><span id="first-step-note"
+                    >SEU PRÓXIMO DESTINO COMEÇA AQUI</span
+                  ><button
+                    type="submit"
+                    id="next-button"
+                    class="button button-dark"
+                  >
+                    Continuar <svg class="icon"><use href="#arrow" /></svg>
+                  </button>
+                </div>
+              </fieldset>
+              <div class="honeypot" aria-hidden="true">
+                <label for="website">Deixe este campo vazio</label
+                ><input
+                  id="website"
+                  name="website"
+                  autocomplete="off"
+                  tabindex="-1"
+                />
+              </div>
+            </form>
+            <div
+              class="submission-message"
+              id="submission-message"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></div>
+            <div class="form-footnote">
+              <svg class="icon"><use href="#shield" /></svg
+              ><span
+                >Seus dados serão enviados à organização somente ao
+                finalizar.</span
+              >
+            </div>
+          </div>
+        </div>
+        <noscript
+          ><div class="noscript-notice">
+            Ative o JavaScript para preencher o formulário. Se preferir, fale
+            com Murillo pelo <a href="https://wa.me/5511993417630">WhatsApp</a>.
+          </div></noscript
+        >
+      </section>
+
+      <section
+        class="contact-section"
+        id="contato"
+        aria-labelledby="contact-title"
+      >
+        <div class="container contact-grid">
+          <div>
+            <p class="eyebrow">A GENTE NAVEGA JUNTO</p>
+            <h2 id="contact-title">Alguma dúvida<br />antes de partir?</h2>
+            <p>Fale com a equipe da expedição pelo WhatsApp.</p>
+          </div>
+          <div class="contacts">
+            <a
+              href="https://wa.me/5511993417630"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <span>JETCHULA</span><strong>Murillo</strong
+                ><small>(11) 99341-7630</small>
+              </div>
+              <svg class="icon"><use href="#arrow" /></svg></a
+            ><a
+              href="https://wa.me/5511964467000"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <span>USINA DO JET</span><strong>Renan</strong
+                ><small>(11) 96446-7000</small>
+              </div>
+              <svg class="icon"><use href="#arrow" /></svg
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer container">
+      <span>JETCHULA <b>+</b> USINA DO JET</span>
+      <p>EXPEDIÇÃO RIO TIETÊ · 2026</p>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </footer>
+  </body>
+</html>

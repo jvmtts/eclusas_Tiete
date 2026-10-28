@@ -18,8 +18,9 @@
 @theme {
   --color-ink: #0c2438;
   --color-ocean: #176078;
-  --color-accent: #e75b2e;
-  --color-action: #cf4a21;
+  --color-accent: #176078;
+  --color-accent-light: #80c8eb;
+  --color-action: #176078;
   --color-sand: #f7f5ef;
   --color-line: #e3e6e7;
   --color-muted: #5f707d;
@@ -77,7 +78,7 @@
     outline-offset: 4px;
   }
   ::selection {
-    background: #ed63352d;
+    background: #1760782d;
     color: var(--color-ink);
   }
 }
@@ -90,7 +91,7 @@
     @apply text-[9px] font-semibold tracking-[0.18em] leading-relaxed;
   }
   .button-primary {
-    @apply inline-flex min-h-13 items-center justify-center gap-4 rounded-xl bg-action px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#b83c19] active:translate-y-0 disabled:translate-y-0 disabled:opacity-50;
+    @apply inline-flex min-h-13 items-center justify-center gap-4 rounded-xl bg-action px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#104b60] active:translate-y-0 disabled:translate-y-0 disabled:opacity-50;
   }
   .button-secondary {
     @apply inline-flex min-h-13 items-center justify-center gap-3 rounded-xl border border-line bg-white px-5 py-3 text-[13px] font-medium text-ink transition-colors hover:bg-sand disabled:opacity-50;

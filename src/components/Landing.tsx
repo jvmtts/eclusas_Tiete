@@ -118,7 +118,7 @@ export function Hero() {
               <Waves size={17} aria-hidden /> SÃO PAULO, BRASIL
             </span>
           </div>
-          <div className="absolute -top-4 -right-2 grid size-22 rotate-6 place-items-center rounded-full bg-action text-center text-white shadow-[0_8px_30px_#ed63352a] sm:-right-4 sm:size-26">
+          <div className="absolute -top-4 -right-2 grid size-22 rotate-6 place-items-center rounded-full bg-action text-center text-white shadow-[0_8px_30px_#1760782a] sm:-right-4 sm:size-26">
             <div>
               <span className="block font-display text-3xl leading-none sm:text-4xl">
                 22—29
@@ -198,7 +198,7 @@ export function Contact() {
     <section id="contato" className="bg-ink py-13 text-white sm:py-17">
       <div className="page-container grid gap-9 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
         <div data-reveal>
-          <p className="eyebrow text-accent">A CONVERSA TAMBÉM FAZ PARTE</p>
+          <p className="eyebrow text-accent-light">A CONVERSA TAMBÉM FAZ PARTE</p>
           <h2 className="mt-4 text-3xl leading-tight font-medium tracking-tight sm:text-4xl">
             Antes de acelerar,
             <br />
@@ -235,7 +235,7 @@ export function Contact() {
                   {contact.brand}
                 </span>
                 <ArrowUpRight
-                  className="text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="text-accent-light transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   size={18}
                   aria-hidden
                 />
@@ -243,7 +243,7 @@ export function Contact() {
               <h3 className="mt-5 text-2xl font-medium">{contact.name}</h3>
               <p className="mt-2 text-xs text-white/60">{contact.phone}</p>
               <span className="mt-5 flex items-center gap-1.5 text-[10px] font-medium text-white/75">
-                <Check size={12} className="text-accent" aria-hidden />
+                <Check size={12} className="text-accent-light" aria-hidden />
                 Falar pelo WhatsApp
               </span>
             </a>

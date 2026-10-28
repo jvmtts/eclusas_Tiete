@@ -33,12 +33,12 @@ export function StepSidebar({
         <div className="hidden border-b border-white/10 pb-6 lg:block">
           <div className="flex items-center justify-between">
             <p className="eyebrow text-white/45">SEU EMBARQUE</p>
-            <Anchor size={17} className="text-accent" aria-hidden />
+            <Anchor size={17} className="text-accent-light" aria-hidden />
           </div>
           <p className="mt-4 font-display text-3xl leading-none tracking-wide">
             EXPEDIÇÃO
             <br />
-            <span className="text-accent">RIO TIETÊ.</span>
+            <span className="text-accent-light">RIO TIETÊ.</span>
           </p>
         </div>
         <nav aria-label="Etapas da inscrição">
@@ -90,7 +90,7 @@ export function StepSidebar({
           <p className="mt-3 text-xs leading-[1.8] text-white/65">
             Barra Bonita
             <br />
-            <span className="text-accent">↓</span>
+            <span className="text-accent-light">↓</span>
             <br />
             Santa Clara D’Oeste
           </p>
@@ -116,7 +116,7 @@ export function StepSidebar({
       </div>
       <a
         href="#contato"
-        className="mt-5 hidden items-center justify-between px-1 text-xs font-medium text-ocean hover:text-accent lg:flex"
+        className="mt-5 hidden items-center justify-between px-1 text-xs font-medium text-ocean hover:text-accent-light lg:flex"
       >
         Precisa de ajuda? <ArrowUpRight size={15} aria-hidden />
       </a>

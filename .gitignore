@@ -7,3 +7,6 @@ Thumbs.db
 .env.*
 !.env.example
 qa/
+
+*.tsbuildinfo
+.vercel/

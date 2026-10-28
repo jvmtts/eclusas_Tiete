@@ -1,50 +1,32 @@
-# Verificação local — 28/10/2026
-
-Fonte verificada: repositório `eclusas_Tiete` na Área de Trabalho, dentro de `Projeto Usina`.
+# Validação da reformulação React — 28/10/2026
 
 ## Automatizada
 
-19 testes de domínio passaram. Sintaxe de `js/app.js`, `js/domain.js` e `server.mjs` verificada com Node.js.
+- TypeScript estrito sem erros.
+- Build de produção com Vite e Tailwind concluído.
+- 30 testes passaram: 19 de regras e payload, 11 de transporte com respostas simuladas.
+- Casos de transporte: sucesso confirmado, dados incompletos, arquivo inválido, HTTP 400/429/503, falha de rede, JSON inválido, `success: false`, cancelamento anterior e posterior ao início da requisição.
+- Os testes de rede não enviam dados ao Basin.
 
-Os testes cobrem CPF, nomes com acentos/apóstrofos/hífens, datas impossíveis e futuras, telefones, campos obrigatórios, condições de saúde, acompanhante, documentos, assinaturas de PDF/JPG/PNG, arquivos vazios ou grandes, os seis termos, endpoint e mapeamento dos dados.
+## Navegador
 
-## No navegador
+- Abertura em azul profundo, areia e laranja; logos Usina e JetChula preservados.
+- Campos vazios bloqueiam o avanço e focam o primeiro erro.
+- CPF, CEP e telefones mascarados em controles React.
+- Data de nascimento testada com interação nativa de teclado.
+- Camisetas selecionadas por seus controles visíveis; nome, CPF e RG do acompanhante exigidos quando há acompanhante.
+- Alternar a resposta sobre acompanhante preserva os dados em memória e remove os campos condicionais da interface.
+- Saúde afirmativa exige descrição e foca o detalhe que falta.
+- Os dois documentos são exigidos; PDF de teste com conteúdo incompatível rejeitado, PNG local aceito.
+- Revisão com cinco grupos de informações e seis termos completos.
+- Editar perfil preserva os valores e permite salvar e voltar direto à revisão.
+- Tentativa de finalizar com termos desmarcados produz seis erros, sem iniciar envio.
+- Nenhum erro no console durante o fluxo conferido.
+- Celular de 390 px e desktop de 1440 px sem rolagem horizontal no fluxo testado.
+- Cabeçalho ajustado e conferido em 320 px no build do repositório original, sem rolagem horizontal.
+- Contraste dos textos secundários e dos botões reforçado na paleta final.
+- `npm ci`, build com checagem de TypeScript e os 30 testes executados também no checkout original após a migração.
 
-- Abertura, logos e imagem inspecionados em computador e celular.
-- Larguras de viewport 320, 390 e 768 px sem rolagem horizontal. A largura útil muda com a barra de rolagem do navegador.
-- Fontes locais carregadas; nenhuma referência de descrição ou associação de rótulo quebrada; nenhum ID duplicado.
-- Campos vazios bloqueiam avanço e levam o foco ao primeiro erro.
-- Dados pessoais, endereço e camiseta preenchidos e preservados ao navegar.
-- Resposta afirmativa de saúde exige descrição; resposta negativa oculta e desativa os detalhes.
-- Acompanhante exige seus dados e camiseta; alternar sim/não preserva os valores na página e desativa os campos ocultos.
-- Fluxos com e sem acompanhante percorridos até a revisão.
-- Arquivo de teste com extensão PDF e conteúdo inválido rejeitado.
-- PNG de teste aceito nos dois anexos, sem envio externo; remoção e reescolha do mesmo arquivo funcionaram.
-- Revisão apresenta seis grupos com os dados e os nomes dos anexos, além dos seis termos.
-- Editar uma seção permite salvar e retornar diretamente à revisão.
-- Navegação por teclado inspecionada; foco alcança os controles nativos.
-- Na versão inicial sem Basin configurado, o botão de envio permanecia desativado mesmo após aceitar todos os termos. Não há confirmação fictícia.
+## Limites
 
-## Atualização: Basin, efeitos e ícone
-
-- Endpoint informado pelo usuário configurado: `https://usebasin.com/f/9de4a82af40b`.
-- 19 testes passaram novamente no repositório original. Sintaxe de `js/effects.js` e `js/app.js` verificada.
-- Fluxo percorrido até a revisão após a atualização, com dados e anexos de teste locais. Botão de envio habilitado e aviso de configuração pendente oculto.
-- Tentativa de finalizar com os termos desmarcados exibiu seis erros e focou o primeiro termo, sem entrar no estado de envio nem apresentar confirmação.
-- Efeitos de abertura e imagem ativos no navegador; sem erros registrados no console.
-- Entrada de seções com IntersectionObserver, transição de etapas e efeitos de hover sem bibliotecas adicionais. CSS respeita `prefers-reduced-motion`.
-- Ícones PNG de 32 e 64 px e atalho de 180 px gerados a partir do logo original da Usina. Referências conferidas no navegador.
-
-## Pendente de integração
-
-Nenhuma inscrição foi criada no Google Apps Script ou no Basin. O endpoint já está conectado à configuração, mas o recebimento de arquivos, notificações e regras do painel ainda precisa de um envio de teste expressamente autorizado. A configuração não comprova o recebimento em produção.
-
-## Correção da publicação na Vercel
-
-- A versão publicada retornava HTTP 404 com a mensagem do servidor de prévia.
-- A publicação agora é explícita: framework Other, build `npm run build` e saída estática `dist/`.
-- Servidor local movido para `scripts/preview.mjs`; removido o script `start` que podia confundir a detecção de backend.
-- Build inclui somente HTML, CSS, configuração do formulário, JavaScript do cliente e assets.
-- 22 testes passaram, incluindo geração dos arquivos de publicação, remoção de saídas obsoletas e preservação da saída anterior quando falta uma fonte obrigatória.
-- Prévia de `dist/` conferida no navegador. Raiz, estilos, módulos, configuração e favicon responderam HTTP 200.
-- A validação do domínio de produção deve ocorrer após o novo deployment, usando o commit corrigido.
+Não foi feita inscrição real no Basin. O recebimento final dos documentos e notificações continua dependendo de teste de integração autorizado. A publicação deve ser conferida no domínio público após o novo deployment.

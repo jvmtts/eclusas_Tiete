@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/dm-sans-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("/assets/fonts/barlow-condensed-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@theme {
+  --color-ink: #0c2438;
+  --color-ocean: #176078;
+  --color-accent: #e75b2e;
+  --color-action: #cf4a21;
+  --color-sand: #f7f5ef;
+  --color-line: #e3e6e7;
+  --color-muted: #5f707d;
+  --font-body: "DM Sans", Arial, sans-serif;
+  --font-display: "Barlow Condensed", Impact, sans-serif;
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: var(--color-sand);
+    font-synthesis: none;
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    min-width: 280px;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    touch-action: manipulation;
+  }
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  input[type="date"] {
+    min-width: 0;
+  }
+  input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+  }
+  textarea {
+    min-height: 96px;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  :focus-visible {
+    outline: 3px solid #17607890;
+    outline-offset: 4px;
+  }
+  ::selection {
+    background: #ed63352d;
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply text-[9px] font-semibold tracking-[0.18em] leading-relaxed;
+  }
+  .button-primary {
+    @apply inline-flex min-h-13 items-center justify-center gap-4 rounded-xl bg-action px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#b83c19] active:translate-y-0 disabled:translate-y-0 disabled:opacity-50;
+  }
+  .button-secondary {
+    @apply inline-flex min-h-13 items-center justify-center gap-3 rounded-xl border border-line bg-white px-5 py-3 text-[13px] font-medium text-ink transition-colors hover:bg-sand disabled:opacity-50;
+  }
+  .field-label {
+    @apply mb-2.5 block text-xs leading-relaxed font-semibold text-ink;
+  }
+  .field-input {
+    @apply block h-13 w-full min-w-0 rounded-xl border border-line bg-white px-4 text-base text-ink outline-none transition-colors placeholder:text-[13px] placeholder:text-muted/70 hover:border-ocean/35 focus:border-ocean focus:ring-3 focus:ring-ocean/10 disabled:bg-sand/70 disabled:text-muted sm:text-sm;
+  }
+  .field-input[aria-invalid="true"] {
+    @apply border-red-300 bg-red-50/20 focus:border-red-500 focus:ring-red-100;
+  }
+  .skip-link {
+    @apply fixed top-2 left-2 z-100 -translate-y-24 rounded-xl bg-ink px-5 py-3 text-sm text-white focus:translate-y-0;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes image-enter {
+  from {
+    opacity: 0.4;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    animation: enter 0.75s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+  }
+  .hero-enter:nth-child(2) {
+    animation-delay: 70ms;
+  }
+  .hero-enter:nth-child(3) {
+    animation-delay: 140ms;
+  }
+  .hero-enter:nth-child(4) {
+    animation-delay: 210ms;
+  }
+  .hero-enter:nth-child(5) {
+    animation-delay: 260ms;
+  }
+  .hero-photo {
+    animation: image-enter 1s cubic-bezier(0.2, 0.65, 0.3, 1) 100ms both;
+  }
+  .animate-field {
+    animation: enter 0.24s ease-out both;
+  }
+  [data-reveal] {
+    transition:
+      opacity 0.65s,
+      transform 0.65s cubic-bezier(0.2, 0.65, 0.3, 1);
+  }
+  [data-reveal-pending] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  [data-reveal-pending]:focus-within {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .button-primary:hover {
+    transform: none;
+  }
+}

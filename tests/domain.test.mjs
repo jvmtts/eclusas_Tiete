@@ -8,12 +8,11 @@ import {
   validateStep,
   validateFile,
   validEndpoint,
-  payloadEntries,
-  HEALTH,
-  TERMS,
-  formatDate,
-} from "../js/domain.js";
-import { CONFIG } from "../config.js";
+} from "../src/lib/validation.ts";
+import { payloadEntries } from "../src/lib/payload.ts";
+import { HEALTH, TERMS } from "../src/data/expedition.ts";
+import { formatDate } from "../src/lib/format.ts";
+import { CONFIG } from "../src/config.ts";
 
 const now = new Date("2026-10-28T12:00:00-03:00");
 const pdf = () =>
@@ -91,8 +90,8 @@ test("birth date rejects impossible dates, future dates and invalid ranges", () 
     assert.equal(validBirth(value, now), false);
 });
 
-test("complete participant without companion passes all seven stages", () => {
-  for (let step = 0; step < 7; step++)
+test("complete participant without companion passes all six stages", () => {
+  for (let step = 0; step < 6; step++)
     assert.deepEqual(
       validateStep(
         step,
@@ -128,8 +127,8 @@ test("all health questions must be answered and yes requires details", () => {
 });
 
 test("companion details are conditional and shirt is required only when present", () => {
-  assert.deepEqual(validateStep(4, base), {});
-  const errors = validateStep(4, { ...base, companion: "Sim" });
+  assert.deepEqual(validateStep(2, base), {});
+  const errors = validateStep(2, { ...base, companion: "Sim" });
   assert.ok(
     errors.companionName &&
       errors.companionCpf &&
@@ -144,23 +143,23 @@ test("companion details are conditional and shirt is required only when present"
     companionRg: "1234567",
     companionShirt: "PP",
   };
-  assert.deepEqual(validateStep(4, withCompanion), {});
+  assert.deepEqual(validateStep(2, withCompanion), {});
   assert.ok(
-    validateStep(4, { ...withCompanion, companionCpf: base.cpf }).companionCpf,
+    validateStep(2, { ...withCompanion, companionCpf: base.cpf }).companionCpf,
   );
 });
 
 test("boat stage validates year, other brand, and both documents", () => {
-  assert.ok(validateStep(5, { ...base, year: "2099" }, {}, now).year);
-  assert.ok(validateStep(5, { ...base, brand: "Outra" }, {}, now).otherBrand);
-  const errors = validateStep(5, base, {}, now);
+  assert.ok(validateStep(4, { ...base, year: "2099" }, {}, now).year);
+  assert.ok(validateStep(4, { ...base, brand: "Outra" }, {}, now).otherBrand);
+  const errors = validateStep(4, base, {}, now);
   assert.ok(errors.boatDocument && errors.licenseDocument);
 });
 
 test("every individual term must be accepted", () => {
   for (let index = 0; index < TERMS.length; index++)
     assert.ok(
-      validateStep(6, { ...base, [`term${index}`]: "" })[`term${index}`],
+      validateStep(5, { ...base, [`term${index}`]: "" })[`term${index}`],
     );
 });
 

@@ -1,88 +1,77 @@
-# Expedição Rio Tietê — JetChula + Usina do Jet
+# Eclusas do Tietê — React + TypeScript + Tailwind
 
-Formulário responsivo para a expedição de 22 a 29 de novembro de 2026, de Barra Bonita a Santa Clara D’Oeste.
+Site de inscrição da Expedição Rio Tietê, de 22 a 29 de novembro de 2026, com JetChula e Usina do Jet. Percurso: Barra Bonita → Santa Clara D’Oeste.
+
+## Stack
+
+- React 19 e TypeScript em modo estrito.
+- Tailwind CSS 4, compilado pelo plugin oficial do Vite.
+- Vite 8 para desenvolvimento, preview e produção.
+- Lucide React para ícones importados individualmente.
+- Fontes locais em WOFF2; nenhuma biblioteca de animação, script remoto ou armazenamento de dados pessoais no navegador.
 
 ## Executar
 
-Requer Node.js 22 ou superior. Não há dependências para instalar. A publicação usa um build estático simples, que copia os arquivos públicos para `dist/`.
+Requer Node.js 22.18 ou superior.
 
 ```sh
+npm ci
 npm run dev
 ```
 
-Abra http://127.0.0.1:4173. No PowerShell, use `npm.cmd` se a política de execução bloquear o comando `npm`.
+No PowerShell, use `npm.cmd` se o shim de script estiver bloqueado pela política do sistema.
 
 ```sh
-npm test
 npm run check
-```
-
-O servidor em `scripts/preview.mjs` serve somente para prévia local. Não deve ser usado como backend na Vercel.
-
-## Publicar na Vercel
-
-O `vercel.json` já define as configurações de publicação:
-
-- Framework Preset: **Other** (`framework: null`).
-- Build Command: **npm run build**.
-- Output Directory: **dist**.
-- Install Command: desativado, pois não há dependências.
-- Root Directory: raiz deste repositório.
-
-O build inclui apenas `index.html`, `styles.css`, `config.js`, `assets/` e `js/`. Não publica o servidor de prévia, testes, documentação ou metadados do repositório. Após enviar um commit ao GitHub, aguarde o novo deployment da Vercel. Um redeploy de um commit antigo não contém as correções locais.
-
-Para conferir a saída exata antes de publicar:
-
-```sh
+npm test
 npm run build
 npm run preview
 ```
 
-Em outras hospedagens estáticas, publique o conteúdo de `dist/`. Os caminhos dos arquivos são relativos.
+## Arquitetura
+
+- `src/components/Landing.tsx`: apresentação, informações da expedição e contatos.
+- `src/components/registration/`: formulário, navegação, campos de cada etapa, revisão e confirmação.
+- `src/components/Fields.tsx` e `FileUpload.tsx`: controles acessíveis reutilizáveis.
+- `src/hooks/useRegistration.ts`: estado controlado do formulário, navegação, arquivos, erros e bloqueio de envio duplicado.
+- `src/hooks/useReveal.ts`: entrada de seções com IntersectionObserver e movimento reduzido.
+- `src/lib/validation.ts`: validações independentes da interface.
+- `src/lib/payload.ts`: tradução dos dados para os campos recebidos pelo Basin.
+- `src/lib/submission.ts`: envio multipart, timeout, cancelamento e classificação de respostas ambíguas.
+- `src/config.ts`: endpoint e dados da expedição.
+- `src/data/expedition.ts`: tamanhos, estados, perguntas de saúde e termos da referência.
+- `src/styles.css`: Tailwind, fontes, tokens de identidade, controles comuns e animações leves.
+
+Não há geração da interface por strings HTML nem manipulação manual do DOM para atualizar os campos. Os refs são usados para foco, rolagem e observação de elementos.
+
+## Formulário
+
+Seis etapas: perfil, endereço, tripulação, saúde, moto aquática e revisão/termos. Os tamanhos das camisetas ficam junto à tripulação, evitando uma etapa isolada com um único campo.
+
+O estado permanece na memória enquanto a página está aberta. Trocar de etapa não apaga dados nem arquivos. Depois de chegar à revisão, editar uma seção permite salvar e voltar diretamente à conferência. Recarregar ou fechar a página perde os dados; há aviso de saída após o início do preenchimento.
+
+Campos condicionais antigos não entram no payload quando a resposta muda para não. O acompanhante precisa de dados próprios e camiseta. As respostas afirmativas de saúde exigem descrição. Os seis termos da referência são obrigatórios e enviados com o texto completo e o aceite.
+
+Anexos: PDF, JPG ou PNG, até 5 MB por arquivo. A validação verifica extensão, MIME quando disponível, assinatura inicial e tamanho; os controles do serviço que recebe os documentos continuam necessários. É possível selecionar, arrastar, remover e reescolher o mesmo arquivo.
 
 ## Basin
 
-O endpoint `https://usebasin.com/f/9de4a82af40b` já está configurado em `config.js`. O formulário usa o endereço informado para receber inscrições. Não foi feito envio real de teste nesta implementação. Para trocar o destino, altere `basinEndpoint`; não coloque uma chave de API.
+Endpoint configurado: `https://usebasin.com/f/9de4a82af40b`.
 
-Se o endpoint for removido, todas as etapas e a revisão podem ser usadas, mas o envio volta a ficar bloqueado. Não há confirmação fictícia, envio ao formulário de Monte Verde ou chamada ao Google Apps Script.
+O envio só acontece depois de validar todas as etapas e os documentos. A confirmação exige resposta HTTP válida e JSON com `success: true`. Não há reenvio automático. Uma resposta de rede ambígua bloqueia uma nova tentativa nesta página e orienta contato com a equipe para evitar duplicidade.
 
-O envio usa `multipart/form-data`, com `Accept: application/json`, e só apresenta sucesso após uma resposta HTTP válida com `success: true`. Confira no painel do Basin o recebimento de anexos, limites do plano, domínios permitidos, filtros de spam e notificações. Referência: https://docs.usebasin.com/creating-forms/form-backend/
+O identificador UUID serve para correlação, não representa contador de inscritos nem garantia de idempotência do Basin. Nenhum dado pessoal é enviado em URLs, logs, cookies ou localStorage.
 
-Após configurar, faça uma inscrição de teste expressamente autorizada, confira todos os campos e os dois documentos no painel e remova o registro de teste pelo fluxo normal do Basin. A configuração isolada não comprova a integração.
+Os testes automatizados de envio usam respostas simuladas e arquivos sintéticos. Não foi criada uma inscrição real no Basin. O recebimento final de campos, arquivos e notificações no painel ainda depende de um teste de integração expressamente autorizado.
 
-## Fluxo e tratamento dos dados
+## Vercel
 
-São sete etapas: dados pessoais, endereço, camiseta, saúde, tripulação, moto aquática e revisão com os seis termos de responsabilidade da referência. A camiseta do acompanhante fica junto aos dados dele. Habilitação e documento da moto são exigidos no formulário.
+O `vercel.json` usa preset **Vite**, instalação **npm ci**, build **npm run build** e saída **dist**. O lockfile está versionado. O site continua estático; não há servidor Node de prévia publicado como backend.
 
-Os dados ficam na memória da página durante o preenchimento, sem localStorage, cookies ou rascunho em servidor. Recarregar ou fechar a página perde os dados; há aviso de saída após iniciar o preenchimento. Nenhum dado pessoal é incluído em logs ou URLs.
+Após enviar um commit à branch de produção, aguarde o deployment correspondente. Não faça redeploy de um commit antigo esperando que ele inclua mudanças locais.
 
-Os campos de saúde exigem detalhes apenas para respostas afirmativas. Campos de acompanhante são exigidos somente quando houver acompanhante. Dados condicionais antigos não entram no payload ao mudar a resposta para não.
+## Identidade
 
-Uploads: PDF, JPG e PNG, até 5 MB por documento. O frontend verifica extensão, MIME quando disponível e assinatura inicial do arquivo; isso não substitui as validações e controles de segurança do serviço que recebe os documentos. Há suporte a selecionar, arrastar, remover e substituir arquivos.
+Logos originais da Usina do Jet e JetChula. Os favicons e o atalho de celular usam a Usina. A imagem de abertura é a ilustração já criada com ImageGen; versões WebP para desktop e celular em `public/assets/`. O prompt está em `public/assets/IMAGE-PROMPT.md`. As fontes incluem suas licenças em `public/assets/fonts/`.
 
-Não existe contador sequencial de inscritos. Cada tentativa recebe um UUID para correlação no Basin. Isso não é garantia de idempotência do serviço. Não há reenvio automático. Em falha de rede ou resposta ambígua, o formulário orienta contato com a equipe e bloqueia uma nova tentativa nesta página para evitar duplicidades. Retornar a etapas e corrigir dados não os apaga.
-
-## Arquitetura
-
-- `index.html` e `styles.css`: identidade, estrutura, estilos e responsividade.
-- `js/app.js`: etapas, controles, acessibilidade, revisão, anexos e envio.
-- `js/domain.js`: validações e montagem do payload, testáveis sem navegador.
-- `config.js`: dados da expedição e endpoint.
-- `scripts/preview.mjs`: prévia local da fonte ou da pasta `dist/`, sem dependências.
-- `scripts/build.mjs`: geração da publicação estática na pasta `dist/`.
-- `tests/domain.test.mjs`: testes das regras e casos extremos.
-- `vercel.json`: cabeçalhos para hospedagem na Vercel.
-
-Os termos foram transcritos do formulário de referência. O campo de documento chamado “Arrais amador” na referência é apresentado aqui como “Habilitação náutica”, sem fazer afirmações sobre a categoria legal exigida.
-
-Fontes Barlow Condensed e DM Sans hospedadas localmente em WOFF2, com suas licenças OFL em `assets/fonts/`. O carregamento da página não consulta Google Fonts nem utiliza scripts de terceiros.
-
-Os efeitos de abertura, entrada ao rolar e troca de etapa usam CSS e um IntersectionObserver leve em `js/effects.js`. A preferência por movimento reduzido é respeitada. Não há biblioteca de animação ou processamento contínuo de rolagem. Os ícones do navegador e de atalho no celular usam o logo original da Usina do Jet, em PNG com fundo escuro para legibilidade.
-
-## Identidade e imagem
-
-Logos originais fornecidos: Usina do Jet e JetChula. O enquadramento do JetChula é feito no SVG da página, sem modificar o arquivo original.
-
-`assets/eclusas-hero.webp` e `assets/eclusas-mobile.webp` são versões otimizadas da mesma imagem ilustrativa criada com a ferramenta integrada ImageGen, sem referências fotográficas externas. A cena não é registro documental de uma eclusa específica. A página identifica a imagem como ilustração gerada por IA. O prompt completo está em `assets/IMAGE-PROMPT.md`.
-
-Formulário de referência: https://script.google.com/macros/s/AKfycbyLIDfl-euCooPr0oJOTdvTuiv_HR0AXDZTcSc05yKr369BpD0GeFJ9hAzKdQJFoqS1jA/exec
+Os termos foram preservados do formulário de referência. A habilitação náutica tem rótulo neutro, sem acrescentar afirmações sobre a categoria legal exigida.

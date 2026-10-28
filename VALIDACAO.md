@@ -37,4 +37,14 @@ Os testes cobrem CPF, nomes com acentos/apóstrofos/hífens, datas impossíveis 
 
 ## Pendente de integração
 
-Não houve envio real, publicação ou push ao GitHub. Nenhuma inscrição foi criada no Google Apps Script ou no Basin. O endpoint já está conectado à configuração, mas o recebimento de arquivos, notificações e regras do painel ainda precisa de um envio de teste expressamente autorizado. A configuração não comprova o recebimento em produção.
+Nenhuma inscrição foi criada no Google Apps Script ou no Basin. O endpoint já está conectado à configuração, mas o recebimento de arquivos, notificações e regras do painel ainda precisa de um envio de teste expressamente autorizado. A configuração não comprova o recebimento em produção.
+
+## Correção da publicação na Vercel
+
+- A versão publicada retornava HTTP 404 com a mensagem do servidor de prévia.
+- A publicação agora é explícita: framework Other, build `npm run build` e saída estática `dist/`.
+- Servidor local movido para `scripts/preview.mjs`; removido o script `start` que podia confundir a detecção de backend.
+- Build inclui somente HTML, CSS, configuração do formulário, JavaScript do cliente e assets.
+- 22 testes passaram, incluindo geração dos arquivos de publicação, remoção de saídas obsoletas e preservação da saída anterior quando falta uma fonte obrigatória.
+- Prévia de `dist/` conferida no navegador. Raiz, estilos, módulos, configuração e favicon responderam HTTP 200.
+- A validação do domínio de produção deve ocorrer após o novo deployment, usando o commit corrigido.

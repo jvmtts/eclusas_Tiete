@@ -4,7 +4,7 @@ Formulário responsivo para a expedição de 22 a 29 de novembro de 2026, de Bar
 
 ## Executar
 
-Requer Node.js 22 ou superior. Não há dependências para instalar nem etapa de build.
+Requer Node.js 22 ou superior. Não há dependências para instalar. A publicação usa um build estático simples, que copia os arquivos públicos para `dist/`.
 
 ```sh
 npm run dev
@@ -17,7 +17,28 @@ npm test
 npm run check
 ```
 
-O servidor incluído é uma prévia local. Em produção, hospede os arquivos estáticos com HTTPS. Na Vercel: preset Other, sem comando de build, diretório de saída `.`. Também funciona em hospedagem estática e GitHub Pages; os caminhos são relativos.
+O servidor em `scripts/preview.mjs` serve somente para prévia local. Não deve ser usado como backend na Vercel.
+
+## Publicar na Vercel
+
+O `vercel.json` já define as configurações de publicação:
+
+- Framework Preset: **Other** (`framework: null`).
+- Build Command: **npm run build**.
+- Output Directory: **dist**.
+- Install Command: desativado, pois não há dependências.
+- Root Directory: raiz deste repositório.
+
+O build inclui apenas `index.html`, `styles.css`, `config.js`, `assets/` e `js/`. Não publica o servidor de prévia, testes, documentação ou metadados do repositório. Após enviar um commit ao GitHub, aguarde o novo deployment da Vercel. Um redeploy de um commit antigo não contém as correções locais.
+
+Para conferir a saída exata antes de publicar:
+
+```sh
+npm run build
+npm run preview
+```
+
+Em outras hospedagens estáticas, publique o conteúdo de `dist/`. Os caminhos dos arquivos são relativos.
 
 ## Basin
 
@@ -47,7 +68,8 @@ Não existe contador sequencial de inscritos. Cada tentativa recebe um UUID para
 - `js/app.js`: etapas, controles, acessibilidade, revisão, anexos e envio.
 - `js/domain.js`: validações e montagem do payload, testáveis sem navegador.
 - `config.js`: dados da expedição e endpoint.
-- `server.mjs`: prévia local sem dependências.
+- `scripts/preview.mjs`: prévia local da fonte ou da pasta `dist/`, sem dependências.
+- `scripts/build.mjs`: geração da publicação estática na pasta `dist/`.
 - `tests/domain.test.mjs`: testes das regras e casos extremos.
 - `vercel.json`: cabeçalhos para hospedagem na Vercel.
 

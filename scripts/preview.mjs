@@ -3,7 +3,12 @@ import { readFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { resolve, extname, sep } from "node:path";
 
-const root = fileURLToPath(new URL(".", import.meta.url));
+const root = fileURLToPath(
+  new URL(
+    process.argv.includes("--dist") ? "../dist/" : "../",
+    import.meta.url,
+  ),
+);
 const port = Number(process.env.PORT || 4173);
 if (!Number.isInteger(port) || port < 1 || port > 65535)
   throw new Error("PORT inválida.");

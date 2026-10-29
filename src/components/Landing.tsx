@@ -208,14 +208,8 @@ export function Contact() {
             Nossa equipe ajuda com as dúvidas sobre a expedição e sua inscrição.
           </p>
         </div>
-        <div data-reveal className="grid gap-3 sm:grid-cols-2">
+        <div data-reveal className="grid w-full max-w-sm gap-3 lg:justify-self-end">
           {[
-            {
-              name: "Murillo",
-              brand: "JETCHULA",
-              phone: "(11) 99341-7630",
-              url: "5511993417630",
-            },
             {
               name: "Renan",
               brand: "USINA DO JET",
